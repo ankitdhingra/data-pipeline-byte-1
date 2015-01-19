@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import feedparser
+import logging
 import webapp2
 
 from webapp2_extras import jinja2
@@ -37,10 +39,21 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler((BaseHandler)):
     def get(self):
-         # this will eventually contain information about the RSS feed
-        context = {}
+        feed1 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state=CALIFORNIA")
 
-                  # here we call render_response instead of self.response.write.
+        item1 = feed1["items"][0]
+        logging.info(item1.title)
+        logging.info(item1.description)
+        # this will eventually contain information about the RSS feed
+        feed2 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state=PENNSYLVANIA")
+
+        item2 = feed2["items"][0]
+        logging.info(item2.title)
+        logging.info(item2.description)
+
+        context = {"number1" : item1.description,  "number2" : item2.description}
+
+        # here we call render_response instead of self.response.write.
         self.render_response('index.html', **context)
 
 app = webapp2.WSGIApplication([

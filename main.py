@@ -37,25 +37,31 @@ class BaseHandler(webapp2.RequestHandler):
         rv = self.jinja2.render_template(_template, **context)
         self.response.write(rv)
 
+def extract_feed(state1, state2):
+    feed1 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state="+state1)
+    feed2 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state="+state2)
+    item1 = feed1["items"][0]
+    item2 = feed2["items"][0]
+    return [item1.description, item2.description]
+
+
 class MainHandler((BaseHandler)):
     def get(self):
-        feed1 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state=CALIFORNIA")
+        rents = extract_feed("CALIFORNIA","PENNSYLVANIA")
+        context = {"state1": "CALIFORNIA", "number1" : rents[0], "state2" : "PENNSYLVANIA", "number2" : rents[1]}
 
-        item1 = feed1["items"][0]
-        logging.info(item1.title)
-        logging.info(item1.description)
-        # this will eventually contain information about the RSS feed
-        feed2 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state=PENNSYLVANIA")
+        self.render_response('index.html', **context)
 
-        item2 = feed2["items"][0]
-        logging.info(item2.title)
-        logging.info(item2.description)
+    def post(self):
+        logging.info(self.request)
+        state1 = self.request.get('state1')
+        state2 = self.request.get('state2')
 
-        context = {"state1": "CALIFORNIA", "number1" : item1.description, "state2" : "PENNSYLVANIA", "number2" : item2.description}
+        rents = extract_feed(state1,state2)
+        context = {"state1": state1, "number1" : rents[0], "state2" : state2, "number2" : rents[1]}
 
-        # here we call render_response instead of self.response.write.
         self.render_response('index.html', **context)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/.*', MainHandler)
 ], debug=True)

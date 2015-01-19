@@ -7,10 +7,85 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.css">
 </head>
 <body>
-<h1>Comparing prices</h1>
+<h1>Comparing average price per square feet between</h1>
 
+<form action="compare" method="POST">
+    <select name="state1">
+        <option value="ALABAMA" {% print "selected" if state1 == "ALABAMA" %}>Alabama</option>
+        <option value="ARIZONA" {% print "selected" if state1 == "ARIZONA" %}>Arizona</option>
+        <option value="ARKANSAS" {% print "selected" if state1 == "ARKANSAS" %}>Arkansas</option>
+        <option value="CALIFORNIA" {% print "selected" if state1 == "CALIFORNIA" %}>California</option>
+        <option value="COLORADO" {% print "selected" if state1 == "COLORADO" %}>Colorado</option>
+        <option value="CONNECTICUT" {% print "selected" if state1 == "CONNECTICUT" %}>Connecticut</option>
+        <option value="DELAWARE" {% print "selected" if state1 == "DELAWARE" %}>Delaware</option>
+        <option value="FLORIDA" {% print "selected" if state1 == "FLORIDA" %}>Florida</option>
+        <option value="GEORGIA" {% print "selected" if state1 == "GEORGIA" %}>Georgia</option>
+        <option value="HAWAII" {% print "selected" if state1 == "HAWAII" %}>Hawaii</option>
+        <option value="ILLINOIS" {% print "selected" if state1 == "ILLINOIS" %}>Illinois</option>
+        <option value="IOWA" {% print "selected" if state1 == "IOWA" %}>Iowa</option>
+        <option value="KENTUCKY" {% print "selected" if state1 == "KENTUCKY" %}>Kentucky</option>
+        <option value="MARYLAND" {% print "selected" if state1 == "MARYLAND" %}>Maryland</option>
+        <option value="MASSACHUSETTS" {% print "selected" if state1 == "MASSACHUSETTS" %}>Massachusetts</option>
+        <option value="MICHIGAN" {% print "selected" if state1 == "MICHIGAN" %}>Michigan</option>
+        <option value="MINNESOTA" {% print "selected" if state1 == "MINNESOTA" %}>Minnesota</option>
+        <option value="NEBRASKA" {% print "selected" if state1 == "NEBRASKA" %}>Nebraska</option>
+        <option value="NEVADA" {% print "selected" if state1 == "NEVADA" %}>Nevada</option>
+        <option value="NEWHAMPSHIRE" {% print "selected" if state1 == "NEWHAMPSHIRE" %}>New Hampshire</option>
+        <option value="NEWJERSEY" {% print "selected" if state1 == "NEWJERSEY" %}>New Jersey</option>
+        <option value="NEWMEXICO" {% print "selected" if state1 == "NEWMEXICO" %}>New Mexico</option>
+        <option value="NEWYORK" {% print "selected" if state1 == "NEWYORK" %}>New York</option>
+        <option value="NORTHCAROLINA" {% print "selected" if state1 == "NORTHCAROLINA" %}>North Carolina</option>
+        <option value="OHIO" {% print "selected" if state1 == "OHIO" %}>Ohio</option>
+        <option value="OKLAHOMA" {% print "selected" if state1 == "OKLAHOMA" %}>Oklahoma</option>
+        <option value="OREGON" {% print "selected" if state1 == "OREGON" %}>Oregon</option>
+        <option value="PENNSYLVANIA" {% print "selected" if state1 == "PENNSYLVANIA" %}>Pennsylvania</option>
+        <option value="RHODEISLAND" {% print "selected" if state1 == "RHODEISLAND" %}>Rhode Island</option>
+        <option value="SOUTHCAROLINA" {% print "selected" if state1 == "SOUTHCAROLINA" %}>South Carolina</option>
+        <option value="VIRGINIA" {% print "selected" if state1 == "VIRGINIA" %}>Virginia</option>
+        <option value="WASHINGTON" {% print "selected" if state1 == "WASHINGTON" %}>Washington</option>
+        <option value="WISCONSIN" {% print "selected" if state1 == "WISCONSIN" %}>Wisconsin</option>
+    </select>
+    <select name="state2">
+        <option value="ALABAMA" {% print "selected" if state2 == "ALABAMA" %}>Alabama</option>
+        <option value="ARIZONA" {% print "selected" if state2 == "ARIZONA" %}>Arizona</option>
+        <option value="ARKANSAS" {% print "selected" if state2 == "ARKANSAS" %}>Arkansas</option>
+        <option value="CALIFORNIA" {% print "selected" if state2 == "CALIFORNIA" %}>California</option>
+        <option value="COLORADO" {% print "selected" if state2 == "COLORADO" %}>Colorado</option>
+        <option value="CONNECTICUT" {% print "selected" if state2 == "CONNECTICUT" %}>Connecticut</option>
+        <option value="DELAWARE" {% print "selected" if state2 == "DELAWARE" %}>Delaware</option>
+        <option value="FLORIDA" {% print "selected" if state2 == "FLORIDA" %}>Florida</option>
+        <option value="GEORGIA" {% print "selected" if state2 == "GEORGIA" %}>Georgia</option>
+        <option value="HAWAII" {% print "selected" if state2 == "HAWAII" %}>Hawaii</option>
+        <option value="ILLINOIS" {% print "selected" if state2 == "ILLINOIS" %}>Illinois</option>
+        <option value="IOWA" {% print "selected" if state2 == "IOWA" %}>Iowa</option>
+        <option value="KENTUCKY" {% print "selected" if state2 == "KENTUCKY" %}>Kentucky</option>
+        <option value="MARYLAND" {% print "selected" if state2 == "MARYLAND" %}>Maryland</option>
+        <option value="MASSACHUSETTS" {% print "selected" if state2 == "MASSACHUSETTS" %}>Massachusetts</option>
+        <option value="MICHIGAN" {% print "selected" if state2 == "MICHIGAN" %}>Michigan</option>
+        <option value="MINNESOTA" {% print "selected" if state2 == "MINNESOTA" %}>Minnesota</option>
+        <option value="NEBRASKA" {% print "selected" if state2 == "NEBRASKA" %}>Nebraska</option>
+        <option value="NEVADA" {% print "selected" if state2 == "NEVADA" %}>Nevada</option>
+        <option value="NEWHAMPSHIRE" {% print "selected" if state2 == "NEWHAMPSHIRE" %}>New Hampshire</option>
+        <option value="NEWJERSEY" {% print "selected" if state2 == "NEWJERSEY" %}>New Jersey</option>
+        <option value="NEWMEXICO" {% print "selected" if state2 == "NEWMEXICO" %}>New Mexico</option>
+        <option value="NEWYORK" {% print "selected" if state2 == "NEWYORK" %}>New York</option>
+        <option value="NORTHCAROLINA" {% print "selected" if state2 == "NORTHCAROLINA" %}>North Carolina</option>
+        <option value="OHIO" {% print "selected" if state2 == "OHIO" %}>Ohio</option>
+        <option value="OKLAHOMA" {% print "selected" if state2 == "OKLAHOMA" %}>Oklahoma</option>
+        <option value="OREGON" {% print "selected" if state2 == "OREGON" %}>Oregon</option>
+        <option value="PENNSYLVANIA" {% print "selected" if state2 == "PENNSYLVANIA" %}>Pennsylvania</option>
+        <option value="RHODEISLAND" {% print "selected" if state2 == "RHODEISLAND" %}>Rhode Island</option>
+        <option value="SOUTHCAROLINA" {% print "selected" if state2 == "SOUTHCAROLINA" %}>South Carolina</option>
+        <option value="VIRGINIA" {% print "selected" if state2 == "VIRGINIA" %}>Virginia</option>
+        <option value="WASHINGTON" {% print "selected" if state2 == "WASHINGTON" %}>Washington</option>
+        <option value="WISCONSIN" {% print "selected" if state2 == "WISCONSIN" %}>Wisconsin</option>
+    </select>
+    <input type="submit" value="Compare">
+</form>
 <h2>Results:</h2>
-<div id="chart"><svg style="height:400px; width: 400px"></svg></div>
+<div id="chart">
+    <svg style="height:400px; width: 400px"></svg>
+</div>
 
 <script>
 nv.addGraph(function() {
@@ -50,7 +125,6 @@ function exampleData() {
   ]
 
 }
-
 </script>
 </body>
 </html>

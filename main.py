@@ -51,7 +51,7 @@ class MainHandler((BaseHandler)):
         logging.info(item2.title)
         logging.info(item2.description)
 
-        context = {"number1" : item1.description,  "number2" : item2.description}
+        context = {"state1": "CALIFORNIA", "number1" : item1.description, "state2" : "PENNSYLVANIA", "number2" : item2.description}
 
         # here we call render_response instead of self.response.write.
         self.render_response('index.html', **context)

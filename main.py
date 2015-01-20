@@ -39,7 +39,9 @@ class BaseHandler(webapp2.RequestHandler):
 
 def extract_feed(state1, state2):
     feed1 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state="+state1)
+    logging.info("Respose from 1st query: " +str(feed1["items"]))
     feed2 = feedparser.parse("http://pipes.yahoo.com/pipes/pipe.run?_id=ac7cd8d6fb84bb590251d80847338d25&_render=rss&state="+state2)
+    logging.info("Respose from 2st query: " + str(feed2["items"]))
     item1 = feed1["items"][0]
     item2 = feed2["items"][0]
     return [item1.description, item2.description]

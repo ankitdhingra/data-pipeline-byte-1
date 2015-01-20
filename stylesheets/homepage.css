@@ -7,3 +7,8 @@ form{
 .footnote{
     font-style: italic;
 }
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
